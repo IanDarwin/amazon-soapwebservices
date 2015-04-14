@@ -59,6 +59,21 @@
 				<version>1.3.2</version>
 				<executions>
 					<execution>
+						<id>mkdir</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>mkdir</executable>
+							<arguments>
+								<argument>-p</argument>
+								<argument>target/classes</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate</id>
 						<phase>generate-sources</phase>
 						<goals>
 							<goal>exec</goal>
