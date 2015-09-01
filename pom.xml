@@ -15,7 +15,8 @@
 
 	<name>DarwinSys Amazon Web Services</name>
 	<description>
-		Ian Darwin's packaging of Amazon SOAP
+		Ian Darwin's packaging of Amazon SOAP API; project just mavenises running of wsimport from
+		Amazon's public file.
 	</description>
 	<url>http://darwinsys.com/darwinsys-api/</url>
 	<licenses>
