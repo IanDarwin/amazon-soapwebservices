@@ -1,0 +1,10 @@
+= amazon-webservices
+
+This tiny demo shows the mavenization of running the Java SDK standard tool _wsimport_
+to import a WSDL and generate a consumable JAR file with all the generated "portable
+artifacts" for client.
+
+The WSDL happens to be for Amazon's older web service but any WSDL should do,
+just so you change the generated package name at the same time as you change the WSDL.
+
+Part of a larger project to use Amazon's services, which is not publicly released, sorry.
