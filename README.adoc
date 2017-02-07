@@ -8,3 +8,9 @@ The WSDL happens to be for Amazon's older web service but any WSDL should do,
 just so you change the generated package name at the same time as you change the WSDL.
 
 Part of a larger project to use Amazon's services, which is not publicly released, sorry.
+
+== Usage
+
+Just do:
+
+	mvn jaxws:wsimport package
