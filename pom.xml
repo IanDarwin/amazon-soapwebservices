@@ -8,7 +8,7 @@
 	<inceptionYear>1995</inceptionYear>
 
 	<!-- 
-	How to generate the WSDL; Retrieved from Amazon.com 2008-10-22,at
+	Based on: How to generate the WSDL; Retrieved from Amazon.com 2008-10-22:
 	http://docs.amazonwebservices.com/AWSECommerceService/latest/GSG/YourDevelopmentEnvironment.html#JavaClientSideLibrary:
 	wsimport -d ./build -s ./src  -p com.ECS.client.jax http://ecs.amazonaws.com/AWSECommerceService/AWSECommerceService.wsdl -b jaxws-custom.xml . 
 	-->
@@ -45,41 +45,58 @@
     </parent>
 
 	<properties>
-		<javase-version>1.8</javase-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<javase.version>1.8</javase.version>
 		<maven.compiler.source>${javase.version}</maven.compiler.source>
 		<maven.compiler.target>${javase.version}</maven.compiler.target>
 		<maven.compiler.testSource>${javase.version}</maven.compiler.testSource>
 		<maven.compiler.testTarget>${javase.version}</maven.compiler.testTarget>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
 		<WSDL>http://ecs.amazonaws.com/AWSECommerceService/AWSECommerceService.wsdl</WSDL>
 	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 	<build>
+		<sourceDirectory>${project.basedir}/src/generated/java</sourceDirectory>
 		<plugins>
-            <!-- JAX-WS, see http://www.mojohaus.org/jaxws-maven-plugin -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxws-maven-plugin</artifactId>
-                <version>2.4.1</version>
+			<plugin>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<version>2.3.2</version>
 				<executions>
 					<execution>
-					<goals>
-						<goal>wsimport</goal>
-					</goals>
-					<configuration>
-						<vmArgs><!-- Java 8 security stuff -->
-							<arg>-Djavax.xml.accessExternalSchema=all</arg>
-						</vmArgs>
-						<wsdlUrls>
-							<wsdlUrl>${WSDL}</wsdlUrl>
-						</wsdlUrls>
-						<packageName>com.ECS.client.jax</packageName>
-					</configuration>
+						<id>wsdl2java</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+						<configuration>
+							<bindingFiles>
+								<!-- one or more bindingFile -->
+							</bindingFiles>
+							<sourceDestDir>${project.basedir}/src/generated/java</sourceDestDir>
+							<wsdlUrls>
+								<url>${WSDL}</url>
+							</wsdlUrls>
+							<packageName>com.ECS.client.jax</packageName>
+						</configuration>
 					</execution>
 				</executions>
-            </plugin>
+			</plugin>
 		</plugins>
 	</build>
 
